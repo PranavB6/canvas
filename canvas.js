@@ -15,6 +15,8 @@ class Circle {
     constructor() {
         this.x = 300;
         this.y = 300;
+        this.dx = 5;
+        this.dy = 5;
         this.radius = 30;
         this.color = 'red';
     }
@@ -28,7 +30,17 @@ class Circle {
     }
 
     update() {
-        this.x += 20;
+
+        if ((this.x + this.radius) >= innerWidth || (this.x - this.radius) < 0) {
+            this.dx = -this.dx;
+        }
+
+        if ((this.y + this.radius) >= innerHeight || (this.y - this.radius) < 0) {
+            this.dy = -this.dy;
+        }
+        
+        this.x += this.dx;
+        this.y += this.dy;
 
         this.draw();
     }
@@ -38,6 +50,8 @@ let circle = new Circle();
 
 function animate() {
     requestAnimationFrame(animate);
+
+    ctx?.clearRect(0, 0, innerWidth, innerHeight);
 
     circle.update();
 }
