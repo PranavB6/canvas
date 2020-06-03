@@ -10,3 +10,18 @@ if (!ctx) {
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
+
+class Circle {
+    constructor() {}
+
+    draw() {
+        ctx?.beginPath()
+        ctx?.arc(300, 300, 30, 0, Math.PI * 2);
+        ctx.fillStyle = 'red';
+        ctx?.fill();
+        ctx?.closePath();
+    }
+}
+
+let circle = new Circle();
+circle.draw();
