@@ -13,9 +13,9 @@ if (!ctx) {
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let MAX_SPEED = 1;
+let MAX_SPEED = 0.5;
 let MAX_RADIUS = 40;
-let NUMBER_OF_CIRCLES = 300;
+let NUMBER_OF_CIRCLES = 800;
 
 let colors = ["black", "red", "blue"];
 function getRandomColor() {
@@ -28,9 +28,16 @@ window.addEventListener("mousemove", (event) => {
     mouse.y = event.clientY;
 });
 
+window.addEventListener("resize", (event) => {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    init();
+});
+
 class Circle {
     constructor() {
-        this.minRadius = random(1, 3);
+        this.minRadius = random(1, 4);
         this.radius = this.minRadius;
         this.x = random(0 + this.radius, innerWidth - this.radius);
         this.y = random(0 + this.radius, innerHeight - this.radius);
@@ -74,9 +81,16 @@ class Circle {
     }
 }
 
+
+
 let circles = [];
-for (let i = 0; i < NUMBER_OF_CIRCLES; ++i) {
-    circles.push(new Circle());
+function init() {
+    circles = [];
+    for (let i = 0; i < NUMBER_OF_CIRCLES; ++i) {
+        circles.push(new Circle());
+    }
+
+    animate();
 }
 
 function animate() {
@@ -87,4 +101,4 @@ function animate() {
     circles.forEach((circle) => circle.update());
 }
 
-animate();
+init();
