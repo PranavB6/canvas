@@ -13,19 +13,30 @@ if (!ctx) {
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-let MAX_SPEED = 10;
-let MIN_RADIUS = 2;
+let MAX_SPEED = 1;
 let MAX_RADIUS = 40;
 let NUMBER_OF_CIRCLES = 300;
 
+let colors = ["black", "red", "blue"];
+function getRandomColor() {
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+let mouse = { x: -100, y: -100 };
+window.addEventListener("mousemove", (event) => {
+    mouse.x = event.clientX;
+    mouse.y = event.clientY;
+});
+
 class Circle {
     constructor() {
-        this.radius = MIN_RADIUS;
+        this.minRadius = random(1, 3);
+        this.radius = this.minRadius;
         this.x = random(0 + this.radius, innerWidth - this.radius);
         this.y = random(0 + this.radius, innerHeight - this.radius);
-        this.dx = random(1, MAX_SPEED);
-        this.dy = random(1, MAX_SPEED);
-        this.color = "black";
+        this.dx = random(-MAX_SPEED, MAX_SPEED);
+        this.dy = random(-MAX_SPEED, MAX_SPEED);
+        this.color = getRandomColor();
     }
 
     draw() {
@@ -47,6 +58,17 @@ class Circle {
 
         this.x += this.dx;
         this.y += this.dy;
+
+        if (
+            Math.abs(mouse.x - this.x) < 50 &&
+            Math.abs(mouse.y - this.y) < 50
+        ) {
+            if (this.radius < MAX_RADIUS) {
+                this.radius += 1;
+            }
+        } else if (this.radius > this.minRadius) {
+            this.radius -= 1;
+        }
 
         this.draw();
     }
