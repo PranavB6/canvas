@@ -14,10 +14,12 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 let MAX_SPEED = 0.5;
-let MAX_RADIUS = 40;
-let NUMBER_OF_CIRCLES = 800;
+let MAX_RADIUS = 60;
+let NUMBER_OF_CIRCLES = 1000;
 
-let colors = ["black", "red", "blue"];
+let colors = ["#03071e","#370617","#6a040f","#9d0208","#d00000","#dc2f02","#e85d04","#f48c06","#faa307","#ffba08"];
+
+colors = ["#ffbe0b","#fb5607","#ff006e","#8338ec","#3a86ff"];
 function getRandomColor() {
     return colors[Math.floor(Math.random() * colors.length)];
 }
