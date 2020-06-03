@@ -12,16 +12,34 @@ canvas.width = innerWidth;
 canvas.height = innerHeight;
 
 class Circle {
-    constructor() {}
+    constructor() {
+        this.x = 300;
+        this.y = 300;
+        this.radius = 30;
+        this.color = 'red';
+    }
 
     draw() {
         ctx?.beginPath()
-        ctx?.arc(300, 300, 30, 0, Math.PI * 2);
-        ctx.fillStyle = 'red';
+        ctx?.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
         ctx?.fill();
         ctx?.closePath();
+    }
+
+    update() {
+        this.x += 20;
+
+        this.draw();
     }
 }
 
 let circle = new Circle();
-circle.draw();
+
+function animate() {
+    requestAnimationFrame(animate);
+
+    circle.update();
+}
+
+animate();
